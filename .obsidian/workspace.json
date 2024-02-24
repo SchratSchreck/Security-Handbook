@@ -1,0 +1,164 @@
+{
+  "main": {
+    "id": "83825a23978c06c8",
+    "type": "split",
+    "children": [
+      {
+        "id": "f6fd3c191edf3586",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "02b6564a7cb7e194",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ecaddfa79c5c0c27",
+    "type": "split",
+    "children": [
+      {
+        "id": "2dd5f8dccf0c38fc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "436d57e0689dc54f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2ec6b3307ac80d27",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#Pre-Security",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "65b63c4a9cb49036",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "5cce96382598ef50",
+    "type": "split",
+    "children": [
+      {
+        "id": "d5de7d910bc4d4f6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "42f29757a6f3dfba",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ab67471ffc51e8c2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f770efe30281281f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "1099d0a1c44924ee",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "02b6564a7cb7e194",
+  "lastOpenFiles": [
+    "Operating System Security.md",
+    "Network Fundamentals.md",
+    "Linux Fundamentals.md",
+    "Introduction to Defensive Security.md",
+    "How the Web works.md",
+    "Web Application Security.md",
+    "SecurityHandbook.md",
+    "create a link.md",
+    "Pasted image 20240220140513.png",
+    "Pasted image 20240220072525.png",
+    "Welcome.md",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
+    "Introduction.md",
+    "howdatabaseswork.md",
+    "Hallo welt.md",
+    "2024-02-19.md",
+    "Untitled.md",
+    "test.md"
+  ]
+}
