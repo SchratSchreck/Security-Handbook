@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "f6fd3c191edf3586",
+        "id": "20de295efa0549b1",
         "type": "tabs",
         "children": [
           {
-            "id": "02b6564a7cb7e194",
+            "id": "074dbcc12d80cb4f",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Linux Fundamentals.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,8 +85,9 @@
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": false,
-                "extraContext": false,
+                "file": "Linux Fundamentals.md",
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Linux Fundamentals.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Linux Fundamentals.md"
+              }
             }
           }
         ],
@@ -139,14 +147,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "02b6564a7cb7e194",
+  "active": "074dbcc12d80cb4f",
   "lastOpenFiles": [
-    "Operating System Security.md",
-    "Network Fundamentals.md",
+    "Windows Fundamentals.md",
     "Linux Fundamentals.md",
-    "Introduction to Defensive Security.md",
     "How the Web works.md",
     "Web Application Security.md",
+    "Operating System Security.md",
+    "Network Fundamentals.md",
+    "Introduction to Defensive Security.md",
     "SecurityHandbook.md",
     "create a link.md",
     "Pasted image 20240220140513.png",

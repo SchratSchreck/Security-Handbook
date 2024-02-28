@@ -1,3 +1,4 @@
+#Linux
 # Running Your First Commands
 
 A big selling point of Linux is that they can be lightweigth. Often there is no *Graphical User Interface (GUI)* to interact with, instead you interact with the *Terminal*, which is text-based. 
@@ -318,3 +319,88 @@ Some other signals are:
 - *SIGSTOP:* Stop/supsend the process
 
 ## How do Processes Start?
+An OS uses namespaces to split up its resources (*CPU, RAM, priority*) and isolate processes form another. Only processes form the same namespace can see each other.
+The process with the ID of 0 is the system init,such as *systemd*  on Ubuntu, and will start when the system boots. *systemd* is one of the first to start. It manages the user's processes and sits between them and the OS. Any software we start will start as a child process of *systemd*, meaning *systemd* will control it.
+
+## Getting Processes/Services to Start on Boot
+
+Web server, database server and transfer server are often told to start during the boot-up. 
+The `systemctl` command lets us interact with the *sysemd* process/daemon allowing us to tell the system to launch a programm on boot.
+`systemctl [option] [service]` is the syntax for the command and you can choose between four options:
+- Start (Starts the service)
+- Stop 
+- Enable (starts the service on boot)
+- Disable
+
+## Introduction to Backgrounding and Foregrounding 
+ Processes can run in the foreground and in the background. An example is the `echo` command as the output is in the foreground, but with the `&` operator we can run the command in the background.
+ ```
+ root@linux3:~# echo "Hello World"
+ > Hello World
+ root@linux3:~# echo "Hello World" &
+ > [1] 16889
+```
+ As you can see when running `echo` in the background it will give the PID and not the output.
+ Another way of backgrounding (or pausing) processes is by using `Ctrl+z`. Running a process in the background is usefull for large tasks like copying files, as we will not have to wait until the task is finished to execute other commands.
+
+To return a process to the foreground use the `fg` command:
+```
+root@linux3:/var/opt# fg
+```
+
+# Automation
+Tasks like backing up files, launching your favorite programs and other can be automated, meaning they will launch at a set time on their own.
+This is made possible by the `cron` process with which we can interact through  `crontabs`, a process that starts at launch and manages cron jobs. A `crontab` is a special file in which you can write commands that are then started. 
+`crontabs` require 6 values to set the starting time:
+- **MIN:** What minute to execute at
+- **HOUR:** What hour to execute at
+- **DOM:** What day of the month to execute at
+- **MON:** What month to execute at
+- **DOW:** What day of the week to execute at
+- **CMD:** The command to execute
+If we do not want or care to set a specific value you can use `*` .
+We use as an example that you want to update cmnatic's Documents every 12 hours the formatting would be:
+```
+ 0 */12 * * * cp -R /home/cmnatic/Documents /var/backups/
+```
+
+Tools like [Crontab Generator](https://crontab-generator.org/) and [Cron Guru](https://crontab.guru/) lets you generate crontab commands. To edit a crontab use `crontab -e` and select an editor (like nano).
+
+# Package Management
+## Introducing Packages and Software Repos
+
+Developers can submit their software to an "apt" repository and, if approved be released to the community. You can add repositories with the command `add-apt-repository` or by listing another provider.
+
+## Managing Your Repositories
+
+Besides the `add-apt-repository` and package installer such as `dpkg` we can use the `apt` command.
+In this example we will add the Sublime Text editor. For the first step we need to add the *Gnu Privacy Guard (GPG)*, which is used to guarantee the integrity of the software.
+
+**1.** Download the GPG key and use `apt-key` to trust it.
+```
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+```
+
+**2.** Add the Sublime Text repostitory to your apt sources
+
+**3.** Create a file (sublime-text.list) in   */etc/apt/sources.list.d*
+```
+root@linux3:etc/apt/sources.list.d# touch sublime-text.list
+root@linux3:etc/apt/sources.list.d# ls
+> sublime-text.list
+```
+
+**4.**  Use a text editor to add ans save the Sublime Text repository into the file:
+```
+deb http://download.sublimetext.com/apt/stable/
+```
+
+**5.**  Update apt with `apt update`
+
+**6.** Install the software with `apt install sublime-text`
+
+To remove a package use `add-apt-repository --remove ppa:PPA_Name/ppa` or by manually deleting the file. Then just use `apt remove softwareName` , i.e. `apt remove sublime-text`
+
+# Logs
+
+Logs are used to check the health of a system and diagnose performance issues or intruder activities as logs also contain information about every single request.  There are also logs that store information about the OS itself, actions of the users and authentication attempts among others.

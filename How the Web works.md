@@ -1,5 +1,4 @@
-#Pre-Security 
-#Something-else
+
 # How The Web Works
 
 ## DNS in detail
