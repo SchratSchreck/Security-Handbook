@@ -390,7 +390,7 @@ root@linux3:etc/apt/sources.list.d# ls
 > sublime-text.list
 ```
 
-**4.**  Use a text editor to add ans save the Sublime Text repository into the file:
+**4.**  Use a text editor to add and save the Sublime Text repository into the file:
 ```
 deb http://download.sublimetext.com/apt/stable/
 ```

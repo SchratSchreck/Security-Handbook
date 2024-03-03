@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "20de295efa0549b1",
+        "id": "7ed5b4b73bb2b50e",
         "type": "tabs",
         "children": [
           {
-            "id": "074dbcc12d80cb4f",
+            "id": "911e676556eaf434",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux Fundamentals.md",
+                "file": "Windows Fundamentals.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "5cce96382598ef50",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Linux Fundamentals.md",
+                "file": "Windows Fundamentals.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Linux Fundamentals.md",
+                "file": "Windows Fundamentals.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Linux Fundamentals.md"
+                "file": "Windows Fundamentals.md"
               }
             }
           }
@@ -147,14 +148,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "074dbcc12d80cb4f",
+  "active": "911e676556eaf434",
   "lastOpenFiles": [
     "Windows Fundamentals.md",
     "Linux Fundamentals.md",
+    "Network Fundamentals.md",
     "How the Web works.md",
     "Web Application Security.md",
     "Operating System Security.md",
-    "Network Fundamentals.md",
     "Introduction to Defensive Security.md",
     "SecurityHandbook.md",
     "create a link.md",
