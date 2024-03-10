@@ -37,12 +37,6 @@ The _Media Access Control_ address is a twelve character hexadecimal number, ass
   
 MAC addresses can be faked or “spoofed”. This occurs when a device pretends to identify as another device by using its MAC address. A scenario could be that a firewall is configured to allow any traffic going to and from the A´MAC of the administrator. Spoofing this MAC lets any traffic from this device pass the firewall.
 
-### Ping (ICMP)
-
-Ping uses _Internet Control Message Protocol (ICMP)_ packets to determine the performance and existence of a connection. The time a ICMP packet travels between devices is measured in ping, using ICMP’s echo and reply packets from the targeted device.
-
-To ping a device use: “ping {IP address}”
-
 ## Intro to LAN
 
 ### Introducing LAN Topologies
@@ -87,7 +81,6 @@ The network relies on a single connection, the backbone cable. It becomes easily
 - little redundancy in case of failures
     
 
-
 **Ring Topology**
 
 The devices are all connected directly to each other. Data is send in one direction until it has reached its destination, devices along the loop forward the data to the next. A device will only forward data if it does not have any to send itself. If the device needs to send data it will send its own first and than forward data from another device.
@@ -123,12 +116,10 @@ Subnets use IP’s in three different ways:
 
 - **Identify the network address:** The _Network Address_ identifies the start of the network and its existence.
     
-
 Example: 192.168.1.0
 
-- **Identify the host address:** The H_ost_ _A__ddress_ identifies a device on the subnet.
+- **Identify the host address:** The Host Address identifies a device on the subnet.
     
-
 Example: 192.168.1.100
 
 - **Identify the default gateway:** The _Default Gateway_ address is assigned to a device that is capable of sending information to another network (not to a device in 192.168.1.0). It can have any address but usually have either the first or last host address (.1 or .254).
@@ -173,40 +164,38 @@ The steps for the assignment are :
     
 4. **DHCP ACK:** the DHCP server send a reply acknowledging that the device can start using the IP
     
-
 ## OSI Model
 
 ### What is the OSI Model?
 
 The _Open System Interconnection (OSI)_ model is the fundamental model in networking, providing a framework which dictates who devices will send, receive and interpret data.
+Although not used in real-world networking it is excellent for learning and understanding the concepts of networking.
 
 Data sent across a network that follows the OSI model can be understood by other devices with different functions and designs.
 
-The OSI model consists of 7 layers, each with its own responsibilities. At every layer new information is added in a process called _encapsulation._
+The OSI model consists of 7 layers, each with its own responsibilities. At every layer new information is added in a process called *Encapsulation* and when received are *De-encapsulated*, meaning the added data is then striped off layer after layer.
 
 The layers are:
   
 ### Layer 7 – Application
 
-In this layer protocols and rules are in place to determine how users should interact with data sent or received. User interact with a _Graphical User Interface (GUI)_ provided by everyday applications.
+In this layer protocols and rules are in place to determine how users should interact with data sent or received. User interact with a _Graphical User Interface (GUI)_ provided by everyday applications and provides a interface apps can use to transmitt their data.
 
-The DNS protocol, which translates domain names to IPs is also a protocol of this layer.
+The *DNS* protocol, which translates domain names to IPs is also a protocol of this layer.
 
 ### Layer 6 – Presentation
 
-Software such as email clients can be different but the data needs to be handled the same way. This layer acts as a translator for data to and from the application layer. A computer receiving data in a specific format will still understand data sent in another format.
-
-Security features such as data encryption ( f.e. HTTPS) occur at this layer.
-
+This layer translates data into a standardised format, acting as a translator for data to and from the application layer. It also handles encryption(*HTTPS*), compression and other transformations to data A computer receiving data in a specific format will still understand data sent in another format.
 ### Layer 5 – Session
 
-When data has been translated and formatted (presentation layer), the session layer will create a connection to the other device. When a connection is established a session is created. The computers are synchronized before dividing the data in small _packets_. If the connection is lost only the _packets_ that were not sent must be sent again instead of the whole data.
+When data has been translated and formatted (Presentation layer), the session layer will create a connection to the other device. When a connection is established a session is created. The computers are synchronized before dividing the data in small _packets_. If the connection is lost only the _packets_ that were not sent must be sent again instead of the whole data.
 
 Sessions are unique, data can not travel over different sessions, but only across each session.
 
 ### Layer 4 – Transportation
 
 This layer is vital for transmitting data between devices and can be done following two protocols, TCP and UDP.
+The data (called Segments or Datagrams) added here during Encapsulation contains, among other things, data specific to the choosen protocol. 
 
 **Transmission Control Protocol (TCP)**
 
@@ -254,24 +243,25 @@ Disadvantages:
 
 ### Layer 3 – Network
 
-On this layer routing and re-assembly of data takes place. Routing determines the optimal path on which the data should be sent, using protocols such as _Open Shortest Path First (OSPF)_ and _Routing Information_ _Protocol (RIP)._ At this layer everything is dealt with via IPs. Routers and other devices are known as Layer 3 devices. Factors which decide what route to take are:
-
+On this layer routing and re-assembly of data takes place. Routing determines the optimal path on which the data should be sent, using protocols such as _Open Shortest Path First (OSPF)_ and _Routing Information_ _Protocol (RIP)._ At this layer Logical addressing (IPs) are used. Routers and other devices are known as Layer 3 devices. Factors which decide what route to take are:
+The header added during Encapsulation contains source and destination IP address. 
 - What path has the least amounts of devices?
     
 - What path is the most reliable?
     
 - Which path has the faster physical connection (copper or fibre)?
     
-
+Data added here during *Encapsulation* are called Packets
 ### Layer 2 – Data link
 
 This layer focuses on the physical addressing, by adding the physical _Media Access Control (MAC)_ address, of the receiving endpoint, to the packet received from layer 3. MAC addresses are set by the manufacturer of _Network Interface Card (NIC),_ which is inside every network-enabled computer, and can not be changed, but spoofed.
 
-It is also responsible to present the data in a form suitable for transmission.
-
+It is also responsible to present the data in a form suitable for transmission and check received data to make sure it has not been corrupted, by adding a trailer at the end of the transmission during *Encapsulation*.  
+ 
 ### Layer 1 – Physical
 
-This layer references the physical components of hardware used to transfer data between devices. Ethernet cables are used to transfer data in binary.
+This layer translates the binary data into (electrical) signals transmiting them and translate incoming signals back into binary. 
+Ethernet cables are used to transfer data in binary.
 
 ## Packets and Frames
 
@@ -292,9 +282,9 @@ A packet using the Internet Protocol has a set of headers, containing additional
 - **Destination Address:** IP address of the device that is supposed to receive the packet
     
 
-### TCP/IP (Three-Way Handshake)
+## TCP/IP Model
 
-The _Transmission Control Protocol (TCP)_ is a protocol used in networking (OSI Layer 4). It consists of four layers, similar to the OSI model:
+The _Transmission Control Protocol (TCP)_ is a protocol used in networking (OSI Layer 4) and controls the flow of data. It consists of four layers, similar to the OSI model:
 
 - Application
     
@@ -304,10 +294,11 @@ The _Transmission Control Protocol (TCP)_ is a protocol used in networking (OSI 
     
 - Network Interface
     
-
 Information is added to each layer of TCP as the packet traverses it, called encapsulation with the reverse being decapsulation.
-
-TCP is connection based, meaning it must establish a connection between devices before data is sent. Because of this TCP guarantees that data that is send will be received. To establish a connection is performs a process called the Three-way handshake.
+The *Internet Protocol* controls how packets are addressed and send.
+This model is the basis for real-world networking.
+### TCP Three-Way-Handshake
+TCP is connection based, meaning it must establish a connection between devices before data is sent. Because of this TCP guarantees that data that is send will be received. To establish a connection is performs a process called the *Three-way handshake*.
   
 1. **SYN-Client:** initial packet sent by a client containing its _Initial Sequence Number (ISN)_
     
@@ -339,10 +330,10 @@ TCP packets contain information called headers, which are added from encapsulati
 - **Data:** stores the data, i.e. bytes of a file
     
 - **Flag:** determines how a packet is supposed to be handled.
-    
-### UDP/IP
 
-The User Datagram Protocol (UDP) is used for communication between devices when loss of data can be tolerated. It is a stateless protocol, which does not require a constant connection. For example no three-way handshake does not occur, neither does synchronization between the two devices. Because there is no process to set up a connection, there is no regard if the send data is received.
+## UDP/IP 
+
+The *User Datagram Protocol (UDP)* is used for communication between devices when loss of data can be tolerated. It is a stateless protocol, which does not require a constant connection. For example no three-way handshake does not occur, neither does synchronization between the two devices. Because there is no process to set up a connection, there is no regard if the send data is received.
 
 UDP packets are simpler than TCP packets and have fewer headers. There are however a few that both have in common:
 
@@ -359,7 +350,7 @@ UDP packets are simpler than TCP packets and have fewer headers. There are howev
 - **Data**
       
 
-### Ports 101
+## Ports 101
 
 Ports are points in which data can be exchanged, any data will be sent or received through these ports. In computing these are values between 0 and 65535. Network devices use ports to enforce strict rules when communicating.
 

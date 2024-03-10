@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "7ed5b4b73bb2b50e",
+        "id": "f6b0cc05253b1154",
         "type": "tabs",
         "children": [
           {
-            "id": "911e676556eaf434",
+            "id": "0edaea3757adeaa6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Windows Fundamentals.md",
+                "file": "Linux Fundamentals.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Pre-Security",
+                "query": "SSH",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -86,7 +87,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Windows Fundamentals.md",
+                "file": "Linux Fundamentals.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Windows Fundamentals.md",
+                "file": "Linux Fundamentals.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +127,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Windows Fundamentals.md"
+                "file": "Linux Fundamentals.md"
               }
             }
           }
@@ -148,15 +149,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "911e676556eaf434",
+  "active": "0edaea3757adeaa6",
   "lastOpenFiles": [
-    "Windows Fundamentals.md",
-    "Linux Fundamentals.md",
+    "Introductory Networking.md",
     "Network Fundamentals.md",
-    "How the Web works.md",
-    "Web Application Security.md",
+    "Windows Fundamentals.md",
+    "Introduction to (Re)searching.md",
+    "Linux Fundamentals.md",
     "Operating System Security.md",
+    "Web Application Security.md",
     "Introduction to Defensive Security.md",
+    "How the Web works.md",
     "SecurityHandbook.md",
     "create a link.md",
     "Pasted image 20240220140513.png",

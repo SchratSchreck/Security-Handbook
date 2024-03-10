@@ -88,7 +88,7 @@ tryhackme@linux2:~$ ls
 > folder1
 ```
 ## Copying and Moving Files and Folders (cp, mv)
-Use `cp sourceFile destinationFile` to copy a note into anotherone. 
+Use `cp sourceFile destinationFile` to copy a note into another one. 
 Moving a file with `mv sourceFile destinationFile` will not copy or create a new file ,but merge the first with the second file. `mv` can also be used to rename files.
 ```
 tryhackme@linux2:~$ cp note note2

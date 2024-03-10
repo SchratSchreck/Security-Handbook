@@ -65,9 +65,7 @@ Our cat Gado was kidnapped and the kidnapper sent us a document and a image.
 
 When creating a text file, the OS saves some metadata and editors like MS Word keeps much information in the file’s metadata. Metadata is data like creation date and last modification date. Depending on the PDF writer used most metadata maintains when exporting the text file to PDF.
 
-To see the metadata we use the program “pdfinfo” if it is not installed on Kali Linux you can install it with “sudo apt install poppler-utils”.
-
-![](file:///C:/Users/matze/AppData/Local/Temp/lu167045q1p4d.tmp/lu167045q1p4o_tmp_f2131d90d59b6579.png)  
+To see the metadata we use the program “pdfinfo” if it is not installed on Kali Linux you can install it with “sudo apt install poppler-utils”. 
 
 
 Photo EXIF Data
@@ -83,16 +81,12 @@ EXIF stands for ”Exchangeable Image File Format”, a standard for saving meta
 
 In the case of a smartphone, because it has a GPS sensor, the GPS coordinates of where the photo was taken are also embedded into it.
 
-A![](file:///C:/Users/matze/AppData/Local/Temp/lu167045q1p4d.tmp/lu167045q1p4o_tmp_b9e00a51881f2948.png) tool to read the EXIF data is “exiftool”, which can read and write metadata in types such as JPEG images. If exiftool is not installed on Kali Linux you can do that with “sudo apt install libimage-exiftool-perl”.
+A tool to read the EXIF data is “exiftool”, which can read and write metadata in types such as JPEG images. If exiftool is not installed on Kali Linux you can do that with “sudo apt install libimage-exiftool-perl”.
 
 Scrolling through the data we eventually find the creation data and the GPS location.
 51 deg 30' 51.90" N, 0 deg 5' 38.73" W
 
-![](file:///C:/Users/matze/AppData/Local/Temp/lu167045q1p4d.tmp/lu167045q1p4o_tmp_9ae44d60317d027d.png) After entering the GPS location into Google maps we can find the place where the photo was taken.
-
-![](file:///C:/Users/matze/AppData/Local/Temp/lu167045q1p4d.tmp/lu167045q1p4o_tmp_fa28bb04ae16fd8.png)  
-  
-
+After entering the GPS location into Google maps we can find the place where the photo was taken.
 ## Security Operations
 
 ### Introduction
@@ -109,7 +103,6 @@ A _Security Operations Center (SOC)_ is a team of security professionals monitor
     
 - **Support with the incident response:** An _incident_ can be an observation, a policy violation, intrusion attempt ot a major breach. The SOC supports the incident response team handling the situation.
     
-
 ### Elements of Security Operations
 
 **Data Sources**
@@ -165,6 +158,3 @@ A _firewall_ is a device that inspects packets entering or leaving a network or 
     
 - **Source and destination port numbers:** In addition to an IP each program on the computer needs a _port number_ to communicate over the internet. A analogy would be similar to a room number.
 
-A firewall rule might be similar to:
-
-![](file:///C:/Users/matze/AppData/Local/Temp/lu167045q1p4d.tmp/lu167045q1p4o_tmp_86374bfc41ddade8.png)
