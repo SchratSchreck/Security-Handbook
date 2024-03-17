@@ -331,9 +331,11 @@ TCP packets contain information called headers, which are added from encapsulati
     
 - **Flag:** determines how a packet is supposed to be handled.
 
+Further reading: https://datatracker.ietf.org/doc/html/rfc9293
+
 ## UDP/IP 
 
-The *User Datagram Protocol (UDP)* is used for communication between devices when loss of data can be tolerated. It is a stateless protocol, which does not require a constant connection. For example no three-way handshake does not occur, neither does synchronization between the two devices. Because there is no process to set up a connection, there is no regard if the send data is received.
+The *User Datagram Protocol (UDP)* is used for communication between devices when loss of data can be tolerated. It is a *stateless* protocol, which does not require a constant connection. For example a three-way handshake does not occur, neither does synchronization between the two devices. Because there is no process to set up a connection, there is no regard if the send data is received.
 
 UDP packets are simpler than TCP packets and have fewer headers. There are however a few that both have in common:
 

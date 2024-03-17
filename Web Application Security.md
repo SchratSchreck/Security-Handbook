@@ -7,8 +7,6 @@ We will introduce Web Application Security with by an Online Shop.
 
 **Web applications** are programs running on a server. [[How the Web works#How Web Servers work |Servers ]] are machines running continuously to *serve* the clients. In the case of an online shopping application the app will read the details from the database, used to store and organize information.
 
-![WebApplicationComponents](./images/WebApplicationComponents.svg)
-
 The database server is responsible for `reading`, `searching` and `writing` to the database.
 
 The shop might need multiple servers for:
@@ -21,8 +19,6 @@ The shop might need multiple servers for:
 2. The web application queries (searches) the products database for the submitted keywords.
 3. The product database returns the search results matching the provided keywords to the web application.
 4. The web application formats the results as a friendly web page and returns them to the user.
-
-
 ### Security Risks
 
 Companies offer bug bounty programs, which offer rewards for finding vulnerabilities.
@@ -116,13 +112,9 @@ To list the files in the current directory we can use the command “ls”:
 
 To display the content of a text file use “cat filename”:
 
-
 The last command to cover is “history” which will display the commands used by a user 
-
-
 
 Two other usernames we have are “linda” and “johnny” and we know that both have little regard to cybersecurity.
 Using the command “su – name”, I changed to johnny’s account with the password “abc123”.
-
 
 If not logged in with a user account I should have used “ssh johnny@10.10.193.96”.  Using the same command I changed to Linda’s account with the password “qwertyuiop”.
