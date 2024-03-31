@@ -177,6 +177,12 @@ tryhackme
 > tryhackme@linux2~$
 ```
 
+It is also possible to login with a key. The syntax is `ssh -i pathToKey username@IP-address`
+```
+root@ip-10-10-81-203:~# ssh -i /root/.ssh/id_rsa tryhackme@10.10.224.147
+```
+
+You should use `chmod 600 keyfile` on any ssh keys to ensure the will not be changed or tampered with.
 # Introduction to Flags and Switches
 Commands will, when not specified, perform their default behavior. For example `ls` will display the the content of a directory but not hidden files. To do that we can use the flag `-a`  (short for `--all`).
 ```
