@@ -65,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -150,17 +151,17 @@
   },
   "active": "c97d2874f1e94d2b",
   "lastOpenFiles": [
-    "OWASP Top 10-2021.md",
+    "Network Fundamentals.md",
     "Network Exploitation Basics.md",
+    "OWASP Top 10-2021.md",
+    "Burp Suite.md",
     "Metasploid.md",
     "Linux Fundamentals.md",
     "How the Web works.md",
-    "Burp Suite.md",
     "Windows Fundamentals.md",
     "2024-04-01.md",
     "Introduction to (Re)searching.md",
     "Introductory Networking.md",
-    "Network Fundamentals.md",
     "images/WebApplicationComponents.svg.md",
     "Web Application Security.md",
     "images",

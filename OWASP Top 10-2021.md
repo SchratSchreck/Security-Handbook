@@ -61,3 +61,109 @@ sqlite> SELECT * FROM customers;
 6. We go back to the login page of the webapplication and enter the username `admin` and password `qwertyuiop`
 
 # 3. Injection
+Injection flaws are very common in web applications and occure when user input are interpreted as commands.
+Some injection examples are:
+- **SQL Injection**: Occurs when user input is passed to SQL queries, manipulating the outcome of these queries, which allows the attacker to access, modify and delete information in the database.
+- **Command Injection**: Occurs when user input is passed to system commands, which will then be executed. 
+
+The main defence against injection attacks is to ensure that user inout is not interpreted as queries or commands, which can be achieved with:
+- **An allow list**: user input is compared to a list of safe inputs or characters and then accepted or rejected
+- **Stripping input**: if the user input contains dangerous characters, they are removed before processing.
+
+## Command Injection
+*Command Injection* happens when server-side code (like [PHP](https://www.php.net/manual/de/index.php)) in a web application calls a function that directly interacts with the server's OS console.
+The scenario: A corporation has developed a web application that lets a user input text which will be displayed on the website. They used the a simple program which calls the `cowsay` command from the servers OS console.
+Let's look at the code they used and what is does:
+```php
+<?php
+    if (isset($_GET["mooing"])) {
+        $mooing = $_GET["mooing"];
+        $cow = 'default';
+
+        if(isset($_GET["cow"]))
+            $cow = $_GET["cow"];
+        
+        passthru("perl /usr/bin/cowsay -f $cow $mooing");
+    }
+?>
+```
+1. Check if the parameter "mooing" is set
+2. The user input is assigned to the variable `$mooing`
+3. Check if the prarameter "cow" is set `$cow` (this sets the displayed animal that "speaks" the user input)
+4. The variable `$cow` gets what is passed through the parameter
+5. The program executes the function `passthru("perl /usr/bin/cowsay -f $cow $mooing");`
+   The `passthru` function executes a command in the OS's console and sends the output back to the browser. 
+
+You can read the docs on `passthru()` [here](https://www.php.net/manual/en/function.passthru.php) 
+### Exploiting Command Injection
+To exploit the web application we take advantage of *inline commands*, a Bash feature which allows to run commands within commands. To execute inline commands use the syntax `$(command)`. When using inline commands the console will execute them first and then use the result as the parameter for the outer command.
+```
+echo "my username is $(whoami)"
+> my username is root
+```
+Some commnands you should try:
+- `whoami`
+- `id`
+- `ifconig/ip addr`
+- `username -a`
+
+# 4. Insecure Design
+*Insecure Design* occurs when the architecture or "idea" of an application is flawed. These can be the result of improper threat modelling during the planning phase or "shortcuts", added by developer to make testing easier and forgotten to be disabled.
+## Example: Insecure Password Reset
+Instagram had a vulnerability which affected the password reset. A user could reset their password by entering a 6-digit code, which was send to them by sms. An attacker could try to brute force the code, and although there was a rate limit, which blocked a user from trying after 250 attempts, but this limit only applied to one IP address. If the attacker used another IP address he could continue to brute force the 6-digit code. A 6-digit code, has a million possible codes, this would mean the attacker needs 4000 Ip addresses to cover all possible codes.
+The flaw in this application is the assumption a single user is not able to use thousands of IP addresses and not based on a improper implementaion.
+## Exercise
+# 5. Security Misconfiguration
+[*Security Misconfiguration*](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/) occur when Security could have been appropriately configured but was not. These can be:
+- Poorly configured permissions on cloud services, like [S3](https://aws.amazon.com/de/s3/)
+- Enableing unnecessary features like services,pages, accounts, privileges
+- Default accounts with unchanged passwords
+- Overly detailed error messages, allowing attacker to gather more information about the system
+- Not using [HTTP Secure Headers](https://owasp.org/www-project-secure-headers/) 
+
+## Debugging Interfaces
+Debugging features are often available in programming frameworks, allowing developers to access advanced functionality, useful for debugging an application. If these features are exposed an attacker could abuse these functionalities.
+
+An example of this is when [Patreon got hacked in 2015](https://labs.detectify.com/writeups/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/), where an open debug interface for a Werkzeug console was found. Werkzeug is a component in Python-based web applications, offering an interface for web servers to execute Python Code. The dubug console of Werkzeug can be accessed via URL `www.website.com/console`, but it will also be presented if an exception is raised by the application. 
+## Exercise
+# 6. Vulnerable and Outdated Components
+Sometimes companies use programs which are outdated or vurnerable, meaning they have well known vulnerabilites.
+A example would be if a company has not updated their version of WordPress. Using a tool like [WPScan](https://wpscan.com/) we find that it is the version 4.6. A quick research will reveal that this version is vulnerable to an unauthenticated remote code execution (RCE) exploit, which can be found on [ExploitDB](https://www.exploit-db.com/exploits/41962). 
+
+Using *Vulnerable and Outdated Components* can be devastating, since their vulnerabilities are well known, exploiting them takes little efford. Because of this components should be updated as soon as possible. 
+## Example
+Scince the components we try to exploit already have known vulnerabilities, we only have to gather enough information to determine what exploit we can use.
+1. We visit a website and are greeted with the default page for the "Nostromo" web server, displaying the version number "1.9.6".
+2. Searching on ExploitDB we find an exploit for this version
+3. We download the exploit and look at the code, in case parameters must be set or lines deleted and delete a line, with the comment "This line needs to be deleted."
+4. We run the exploit with the command `python2 47837.py 127.0.0.1 80 id`
+## Exercise
+# 7. Identification and Authentication Failures
+Authentication and session management are core components of modern web applications. Authentication is needed when access to web applications is only allowed after entering valid credentials. These credentials are normaly a username and password, which are verified by the server and if correct the server provides a session cookie to the browser. Session cookies allow the server to know who is sending data and keeping track of the users action, as HTTP(S) is [stateless](https://www.dev-insider.de/was-bedeutet-stateless-a-3406d7b2ebc08a8c87259d74ab73b04f/).
+A flaw in the authentication mechanism could enable an attacker to gain access to these restricted web applications or pages of a website.
+- **Brute force attacks**: if a web application does not limit the attempts to enter valid credentials an attacker could try to brute force them
+- **Using weak passwords**: when weak passwords, such as "password1" are allowed, it is easy for an attacker to guess or crack them
+- **Using weak session cookies**: if the session cookies contain predictable values, an attacker could set their own session cookies and access a users acount.
+
+To keep an authentication mechanism safe you should:
+- enforce a strong password policy, to avoid password- guessing attacks
+- ensure an automatic lockout after a set number of login attempts to prevent brute force attacks
+- implement Multi-Factor Authentication, adding for example receiving a code on your smartphone after entering your username and password
+## Exercise
+# 8. Software and Data Integrity Failures
+Integrity refers to the concept that data has not been modified. As a means to check that downloaded data has not been modified or damaged *hashes* are often sent along. A *hash* or *digest* is the result of a hashing algorithm, such as MD5, SHA1, SHA256, etc., which takes a input and outputs a number of a set length. If a single bit is changed the hash will be different.
+In Linux you can calculate the hash of a file with:
+```
+user@Linux$ md5sum fileName
+user@Linux$ sha1sum fileName
+user@Linux$ sha256sum fileName
+```
+*Software and Data Integrity Failures* occure when code or infrastructure do not use any kind of integrity checks, which could allow an attacker to modify data without being detected.
+## Software Integrity Failures
+An example for a *Software Integrity Failure* would be if a web application uses third party software or libraries stored on a server outside of their control and no integrity checks are implemented. If an attacker gains access to the third party and inserts malicious code, the web application will now use malicious code which could also affect anyone who visits the website. 
+
+Modern browser allow to specify a hash along the library's URL to check the integrity of the library and only execute the code only if the downloaded hash matches the hash send by the library. This mechanism is called *Subresource Integrity (SRI)*.
+## Data Integrity Failures
+Web application will usually assign session tokens to idetify the user and his behavior´. These session tokens usually take the form of [*cookies*](https://de.wikipedia.org/wiki/HTTP-Cookie). These cookies could contain the username of a user and in each subsequent request the cookie will be send to the server. Without integrity checks someone could change the username in the cookie, as they are stored in the browser, and impersonate another user. 
+One implementation of an integrity check is [*JSON Web Tokens (JWT)*](https://datatracker.ietf.org/doc/html/rfc7519). JWTs allow you to store key-value pairs on tokens, which provide integrity. These tokens ensure that users can not alter the key-value pair and pass the integrity check. 
+The structure of a JWT token consists of 3 parts:
