@@ -107,12 +107,22 @@ Some commnands you should try:
 - `ifconig/ip addr`
 - `username -a`
 
+### Exercise
+1. We visit a page with a text field and the note "Enter your inner cow's mooing", which takes our input and displays a cow "mooing" the entered text
+2. We enter `$whoami` and the text shows "apache"
+3. We know now that we can inject commands and use the commands presented above to gain more informations
 # 4. Insecure Design
 *Insecure Design* occurs when the architecture or "idea" of an application is flawed. These can be the result of improper threat modelling during the planning phase or "shortcuts", added by developer to make testing easier and forgotten to be disabled.
 ## Example: Insecure Password Reset
 Instagram had a vulnerability which affected the password reset. A user could reset their password by entering a 6-digit code, which was send to them by sms. An attacker could try to brute force the code, and although there was a rate limit, which blocked a user from trying after 250 attempts, but this limit only applied to one IP address. If the attacker used another IP address he could continue to brute force the 6-digit code. A 6-digit code, has a million possible codes, this would mean the attacker needs 4000 Ip addresses to cover all possible codes.
 The flaw in this application is the assumption a single user is not able to use thousands of IP addresses and not based on a improper implementaion.
 ## Exercise
+1. We know the username "joseph" and try to gain access to his account.
+2. We click on the "Forgot my password" option
+3. To auuthenticate our identity we need to answer one of three questions
+4. We choose the question "What is your favorit color" and try to brute force the solution by entering different colors
+5. After entering "green" we are presented with a new password 
+6. We enter the username "joseph and the new password and have gained access to the account
 # 5. Security Misconfiguration
 [*Security Misconfiguration*](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/) occur when Security could have been appropriately configured but was not. These can be:
 - Poorly configured permissions on cloud services, like [S3](https://aws.amazon.com/de/s3/)
@@ -126,6 +136,9 @@ Debugging features are often available in programming frameworks, allowing devel
 
 An example of this is when [Patreon got hacked in 2015](https://labs.detectify.com/writeups/how-patreon-got-hacked-publicly-exposed-werkzeug-debugger/), where an open debug interface for a Werkzeug console was found. Werkzeug is a component in Python-based web applications, offering an interface for web servers to execute Python Code. The dubug console of Werkzeug can be accessed via URL `www.website.com/console`, but it will also be presented if an exception is raised by the application. 
 ## Exercise
+1. We navigate to the Werkzeug console of the website at `/console`
+2. We enter the code `import os; print(os.popen("ls -l").read())` to execute the `ls -l` command
+3. We modify the code to read the contens of the `app.py` file, which contains the applications source code
 # 6. Vulnerable and Outdated Components
 Sometimes companies use programs which are outdated or vurnerable, meaning they have well known vulnerabilites.
 A example would be if a company has not updated their version of WordPress. Using a tool like [WPScan](https://wpscan.com/) we find that it is the version 4.6. A quick research will reveal that this version is vulnerable to an unauthenticated remote code execution (RCE) exploit, which can be found on [ExploitDB](https://www.exploit-db.com/exploits/41962). 
@@ -138,6 +151,11 @@ Scince the components we try to exploit already have known vulnerabilities, we o
 3. We download the exploit and look at the code, in case parameters must be set or lines deleted and delete a line, with the comment "This line needs to be deleted."
 4. We run the exploit with the command `python2 47837.py 127.0.0.1 80 id`
 ## Exercise
+1. We visit a online book store, which uses PHP and MYSQL. 
+2. We search for CVE of online book stores on ExploidDB (specifically Remote Code Execution)
+3. We find the Exploit with the ID 47887
+4. We run the exploit with `python3 path/to/exploit URL-of-bookstore`
+5. We can now execute code and get the flag with `cat /opt/flag.txt`
 # 7. Identification and Authentication Failures
 Authentication and session management are core components of modern web applications. Authentication is needed when access to web applications is only allowed after entering valid credentials. These credentials are normaly a username and password, which are verified by the server and if correct the server provides a session cookie to the browser. Session cookies allow the server to know who is sending data and keeping track of the users action, as HTTP(S) is [stateless](https://www.dev-insider.de/was-bedeutet-stateless-a-3406d7b2ebc08a8c87259d74ab73b04f/).
 A flaw in the authentication mechanism could enable an attacker to gain access to these restricted web applications or pages of a website.
@@ -150,6 +168,9 @@ To keep an authentication mechanism safe you should:
 - ensure an automatic lockout after a set number of login attempts to prevent brute force attacks
 - implement Multi-Factor Authentication, adding for example receiving a code on your smartphone after entering your username and password
 ## Exercise
+We want to enter the account of `darren`, we use an exploit by re-registrating an existing user.
+1. We register a new account with the username ` darren` (notice the space at the beginning)
+2. We login with our username and password and have access to `darren`'s account
 # 8. Software and Data Integrity Failures
 Integrity refers to the concept that data has not been modified. As a means to check that downloaded data has not been modified or damaged *hashes* are often sent along. A *hash* or *digest* is the result of a hashing algorithm, such as MD5, SHA1, SHA256, etc., which takes a input and outputs a number of a set length. If a single bit is changed the hash will be different.
 In Linux you can calculate the hash of a file with:
@@ -198,6 +219,15 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjY1MDc2
 | **Header**  | eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0                | {"typ":"JWT","alg":"none"}                |
 | **Payload** | eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjY1MDc2ODM2fQ | {"username":"admin",<br>"exp":1665076836} |
 ## Exercise 
+1. We try to login a web application as a guest, but the account is password protected
+2. After entering wrong credentials we are given the message that we can login with the usename "guest" and the password "guest"
+3. After logging in we open the developer tools of the browser (`F12`) and navigate to "Storage" to inspect the cookies
+4. We now have a cookie from the website with the name "jwt-session" ```
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNzE0NzQzNDY4fQ.pzoaWy33LLOPdlfQ-EAIjf7YrbU0qyXLUqSMzCBNkLc
+```
+5. By double-clicking on the "value" field we can modify the contents
+6. We use the [Base64 Tool](https://appdevtools.com/base64-encoder-decoder) to encode the modified cookie 
 
 # 9. Security Logging and Monitoring Failures
 Every action by a user inside a web application should be logged. This is important becuase when an attack occurs, the actvities of him can be traced and the impact can be determined. 

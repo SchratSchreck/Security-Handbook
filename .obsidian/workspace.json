@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "OWASP Top 10-2021.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -151,9 +151,9 @@
   },
   "active": "c97d2874f1e94d2b",
   "lastOpenFiles": [
+    "OWASP Top 10-2021.md",
     "Network Fundamentals.md",
     "Network Exploitation Basics.md",
-    "OWASP Top 10-2021.md",
     "Burp Suite.md",
     "Metasploid.md",
     "Linux Fundamentals.md",
