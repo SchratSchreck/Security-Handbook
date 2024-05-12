@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OWASP Top 10-2021.md",
-                "mode": "preview",
+                "file": "OWASP Juice Shop.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "nmap",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -87,7 +87,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OWASP Top 10-2021.md",
+                "file": "OWASP Juice Shop.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OWASP Top 10-2021.md",
+                "file": "OWASP Juice Shop.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +127,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OWASP Top 10-2021.md"
+                "file": "OWASP Juice Shop.md"
               }
             }
           }
@@ -152,12 +152,13 @@
   "active": "c97d2874f1e94d2b",
   "lastOpenFiles": [
     "OWASP Top 10-2021.md",
+    "OWASP Juice Shop.md",
+    "How the Web works.md",
     "Network Fundamentals.md",
     "Network Exploitation Basics.md",
     "Burp Suite.md",
     "Metasploid.md",
     "Linux Fundamentals.md",
-    "How the Web works.md",
     "Windows Fundamentals.md",
     "2024-04-01.md",
     "Introduction to (Re)searching.md",
