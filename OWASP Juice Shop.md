@@ -65,3 +65,56 @@ Now we can download the backup file
 **Accessing the administration page**
 1. Open the *Debugger* on your web browser by pressing `F12` on your keyboard or looking in the tools section of the browser
 2. Refresh the page and look out for a file named "main-es2015.js"
+3. Click the `{}` button to format it and search for the word "admin", specifficaly "path: administrator"
+4. This hints at a page called `/#/administrator`, log into the admin account and visit this web page
+
+**View another user's shopping cart**
+1. Start *Burp Suite* log into the admin account and go to "Your Basket"
+2. Forward each request until you see " GET /rest/basket/1 HTTP/1.1"
+3. Change the number after `basket/` to "2", to get the basket of the user with the id "2"
+
+# [Cross-Site Scripting (XSS)](https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)) 
+There are three major types of  XSS attacks:
+
+| Type                                      | Description                                                                                      |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Document Object Model-based (DOM) XSS** | use the `<script></script>` HTML tag to execute malicious javascript                             |
+| **Persistent (Server-side) XSS**          | javascript is executed when the page is loaded, often occurs when user uploads are not sanatized |
+| **Reflected (Client-side) XSS**           | javascript is run on the client-side, often occurs when user search data is not sanatized        |
+**Perform a DOM XSS**
+We will use the iframe element, a common HTML element, with a javascript alert tag:
+```
+<iframe src="javascript:alert(`xss`)">
+```
+When we input this in the search bar a alert will be triggered with the text "XSS".
+This type of XSS is called *Cross Frame Scripting (XFS)*, a common form of detecting XSS vulnerabilities within an application.
+
+The search bar will send a request to the server, which will return the related data, but without correct input sanitation we can perform this XSS attack.
+
+**Perform a persitstent XSS**
+1. Start *Burp Suite*, log into the admin account and navigate to the "Last Login" page
+2. Logout and make sure that the request is captured
+3. Switch to *Burp Suite* and to the "Header" tab
+4. Add a new header with the name "True-Client-IP" and the value 
+```
+<iframe src="javascript:alert(`xss`)">
+```
+5. Forward the request and then sign back in and visit the page again
+6. It should now display the alert massage
+
+**Perform a reflected XSS**
+1. Login the admin account and navigate to "Order History"
+2. Click on the truck icon, this will bring you to the track result page and you will see that there is an id paired with the order inside the URL. 
+```
+192.168.1.101/#/track-result?id=5267-f73dcd000abcc353
+```
+3. We will replace the id with the payload 
+```
+192.168.1.101/#/track-result?id=<iframe src="javascript:alert(`xss`)">
+```
+4.Submit the URL and refresh the page the alert should then be displayed.
+
+The server will have a lookup table or database for each ID, if the id parameter is not sanatized before it is send to the server we are able to perform an XSS attack.
+
+**Score Board**
+Under the `/#/score-board` section you can see a list of all challanges in the shop.
