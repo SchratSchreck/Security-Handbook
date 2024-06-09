@@ -29,7 +29,7 @@ The following commands will help you to navigate the filesystem:
 | mv | move | move a file or folder |
 | rm  | remove | remove a file or folder |
 | file | file | display the type of a file |
-## Listing Files in the Current Directory (ls)
+ **Listing Files in the Current Directory (ls)**
 
 The ls command lists the files and folder contained in the current directory:
 ```
@@ -38,7 +38,7 @@ tryhackme@linnux1:~$ ls
 ```
 You can lists the content of a directory without navigating to it: `ls Pictures`
 
-## Changing the Current Directory (cd)
+ **Changing the Current Directory (cd)**
 
 You can change the current directory with the `cd` command:
 ```
@@ -48,7 +48,7 @@ tryhackme@linux1:~/Pictures$
 You can change to directory by entering the path of it: 
 ``` cd /home/Ubuntu/Documents```
 
-## Outputting the Contents of a File (cat)
+ **Outputting the Contents of a File (cat)**
 
 With the `cat` command you can output the content of text files.
 ```
@@ -160,10 +160,11 @@ tryhackme@linux1:~$ cat welcome
 ```
 # Accessing Linux using SSH
 
-## What is SSH & how Does it Work
+**What is SSH & how Does it Work**
 
-**Secure Shell (SSH)** is a protocol that allows you to send commands on a remote device in an encrypted channel.
-## Using SSH
+*Secure Shell (SSH)* is a protocol that allows you to send commands on a remote device in an encrypted channel.
+
+**Using SSH**
 
 To use SSH you need:
 1. the IP of the system
@@ -183,6 +184,10 @@ root@ip-10-10-81-203:~# ssh -i /root/.ssh/id_rsa tryhackme@10.10.224.147
 ```
 
 You should use `chmod 600 keyfile` on any ssh keys to ensure the will not be changed or tampered with.
+
+**Generating SSH keys**
+You can generate SSH keys with [`ssh-keygen`](https://www.ssh.com/academy/ssh/keygen).
+The keys are stored in the  `~/.ssh`, where the `authorized_keys`file folds the public keys that are allowed to access the server.
 # Introduction to Flags and Switches
 Commands will, when not specified, perform their default behavior. For example `ls` will display the the content of a directory but not hidden files. To do that we can use the flag `-a`  (short for `--all`).
 ```
