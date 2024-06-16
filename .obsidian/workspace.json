@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "John the Ripper.md",
+                "file": "Windows Active Directory.md",
                 "mode": "source",
                 "source": false
               }
@@ -65,8 +65,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -87,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "John the Ripper.md",
+                "file": "Windows Active Directory.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -104,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "John the Ripper.md",
+                "file": "Windows Active Directory.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,12 +126,11 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "John the Ripper.md"
+                "file": "Windows Active Directory.md"
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -149,10 +147,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d5d63a9822617e9a",
+  "active": "436d57e0689dc54f",
   "lastOpenFiles": [
-    "Network Exploitation Basics.md",
     "John the Ripper.md",
+    "Untitled",
+    "Windows Active Directory.md",
+    "Network Exploitation Basics.md",
     "Cryptography 101.md",
     "Linux Fundamentals.md",
     "Windows Fundamentals.md",
@@ -179,8 +179,6 @@
     "Welcome.md",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "Introduction.md",
-    "howdatabaseswork.md",
-    "Hallo welt.md"
+    "Introduction.md"
   ]
 }
