@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Windows Active Directory.md",
+                "file": "Metasploid.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "John",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Windows Active Directory.md",
+                "file": "Metasploid.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Windows Active Directory.md",
+                "file": "Metasploid.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,11 +126,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Windows Active Directory.md"
+                "file": "Metasploid.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -147,25 +148,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "436d57e0689dc54f",
+  "active": "d5d63a9822617e9a",
   "lastOpenFiles": [
+    "Upload Vulnerabilities.md",
+    "Metasploid.md",
+    "Windows Active Directory.md",
+    "Burp Suite.md",
     "John the Ripper.md",
     "Untitled",
-    "Windows Active Directory.md",
     "Network Exploitation Basics.md",
     "Cryptography 101.md",
     "Linux Fundamentals.md",
     "Windows Fundamentals.md",
     "Capture the Flag (CTF) Write-Ups.md",
-    "Upload Vulnerabilities.md",
     "Introduction to (Re)searching.md",
     "Introduction to Defensive Security.md",
     "OWASP Juice Shop.md",
     "OWASP Top 10-2021.md",
     "How the Web works.md",
     "Network Fundamentals.md",
-    "Burp Suite.md",
-    "Metasploid.md",
     "2024-04-01.md",
     "Introductory Networking.md",
     "images/WebApplicationComponents.svg.md",

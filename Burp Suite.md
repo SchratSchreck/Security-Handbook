@@ -20,7 +20,7 @@ Burp Suite also allows the development of extensions written in Java, Python or 
 - **Response Interception**: By default server responses are not intercepted, to enable this click on the checkbox and the defined rules "Was intercepted"
 - **Match and Replace**: This section in the settings enables the use of regular expressions to modify requests, allowing dynamic changes, such as modifying user agent or cookies.
 
-## Connecting through the Proxy (FoxyProxy)
+ **Connecting through the Proxy (FoxyProxy)**
 You need to configure your web browser to redirect traffic to Burp Suite. This can be done with the FoxyProxy web browser extension.
 
 1. Download the [FoxyProxy](https://getfoxyproxy.org/downloads/) extension
@@ -32,7 +32,7 @@ You need to configure your web browser to redirect traffic to Burp Suite. This c
 4. Save the configuration and activate FoxyProxy by clicking the icon in your browser
 5. Enable interception in Burp Suite in the "Proxy" tab
 
-## Proxying HTTPS
+**Proxying HTTPS**
 You might encounter an issue when navigating to sites TLS enabled (HTTPS sites), because your browser does not trust the certificate presented by Burp Suite.
 To resolve this issue you have to manually add the PortSwigger CA certificate to your browser:
 1. Download the certificate from [PortSwigger](https://portswigger.net/burp/documentation/desktop/external-browser-config/certificate)
