@@ -21,19 +21,21 @@
 - **Brute Force:** Attack trying to crack cryptography by trying multiple different inputs, f.e. passwords or keys
 - **Cryptanalysis:** Attacking cryptography by finding weaknesses in the underlying math
 # Hashing
-## Hash functions
+**Hash functions**
 A hash function takes an input of data and creates a "digest" or summary of it with a fixed length. The output will be easy to compute but hard to reverse back to the input and to be predicted. Even changing only a single bit will cause a large change in the output. 
 The output is normally in raw bytes and then encoded (f.e. base64 or hex), but decoding it will still give no information regarding the input.
 
 **Hash collisions**
 A hash collision occurs when 2 different inputs result in the same output. While hash function will try to avoid these collisions as best as they can, they are not unavoidable
-## Uses for Hashing
+
+**Uses for Hashing**
 Hashes are mostly used to verify the integrity of data or verifying passwords.
  
  **Verifying Passwords**
  A hash of a password is stored in you database and are compared to the user input when they attempt to login.
  A problem that could occure is when two user have the same password, resulting in the same hash and when an attacker can crack the hash they can create a lookup table, listing the hash for different passwords. To avoid this a unique "salt" is added to the passwords and stored in the database. This salt is either added at the start or end of the password before being hashed, ensuring that every user will have a unique hash. 
-## Recognising Password Hashes
+
+**Recognising Password Hashes**
 There are automated hash recognition tools, like [hashID](https://pypi.org/project/hashID/) or [Hash Verifier](https://hashes.com/en/tools/verify), but these can be unreliable for hashes without a prefix.
 - *Unix* style password hashes have a prefix, telling us the algorithm used to compute the hash. The format for the hash is: `$format$rounds$salt$hash`
 - *Windows* password hashes use NTLM, a variant of md4 and visually identical; it is important to use context to identify the hash

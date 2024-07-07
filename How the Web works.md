@@ -1,13 +1,11 @@
 
-# How The Web Works
+# DNS in detail
 
-## DNS in detail
-
-### What is DNS?
+## What is DNS?
 
 _Domain Name System (DNS)_ protocol provides a simple way of communicating with devices without having to remember their IP address. It does this by resolving hostnames like “tryhackme.com” to their IP address.
 
-### Domain Hierachy  
+## Domain Hierachy  
   
 **Top-Level Domain (TLD)**
 
@@ -26,7 +24,7 @@ Taking “tryhackme.com” as an example “tryhackme” would be the Second-Lev
 
 A subdomain sits on the left-hand side of the Second-Level Domain and is separated by a period. In “admin.tryhackme.com”, “admin” would be the subdomain. A subdomain has the same naming conventions as the Second-Level Domain. Multiple Subdomains can be split with periods to create longer names like “jupiter.servers.tryhackme.com”
 
-### Record Types
+## Record Types
 
 There are multiple types of DNS records.
 
@@ -50,7 +48,7 @@ These records resolve to the address of the server that handles the email for th
 
 These records are free text fields where any text-based data can be stored. One of the uses of these records are to list servers that are authorized to send emails on behalf of the domain. They can also be used to verify ownership of the domain name when signing up for a third party service.
 
-### Making a Request
+## Making a Request
 
 1. The computer first checks its local cache, when you request a domain name, to see if you recently looked up the address. If not a request to your Recursive DNS Server will be made.
     
@@ -63,9 +61,9 @@ These records are free text fields where any text-based data can be stored. One 
 5. Depending on the record type, the DNS record will be send to the Recursive DNS server where a local copy is cached and relayed to the client that made the request. The DNS records also has a Time to Live (TTL).
     
 
-## HTTP in detail
+# HTTP in detail
 
-### What is HTTP(S)?
+## What is HTTP(S)?
 
 **What is HTTP (HyperText Transfer Protocol)?**
 
@@ -75,7 +73,7 @@ HTTP was developed by Tim Berners-Lee and his team between 1989-1991. It is the 
 
 HTTPS is the secure version of HTTP, where data is encrypted which prevents people from seeing data you send and receive but also assure that you are communicating with the correct web server.
 
-### Requests And Responses
+## Requests And Responses
 
 **What is a URL (Uniform Resource Locator)?**
 
@@ -167,7 +165,7 @@ Content-Length: 98
 - **Line 7-14:** The information that was requested, in this instance the homepage.
     
 
-### HTTP Methods
+## HTTP Methods
 
 HTTP methods allows the client to show their intended action when making a HTML request. The most common are covered here, although you will mostly deal with the GET and POST method.
 
@@ -180,7 +178,7 @@ HTTP methods allows the client to show their intended action when making a HTML 
 - **DELETE Request:** Used to delete information / records from a web server.
     
 
-### HTTP Status Codes
+## HTTP Status Codes
 
 When a HTTP server responds. The first line contains a status code informing the client of the outcome of their request and potentially how to handle it. These codes can be broken down into 5 ranges:
 
@@ -210,7 +208,7 @@ Besides the many different HTTP status codes, applications can define their own.
 | **500 Internal Service Error** | The server has encountered some error with your request and does not know how to handle it properly |
 | **503 Service Unavailable** | The server con not handle the request, it is either overloaded or down for maintanance\| |
 
-### Headers
+## Headers
 
 Headers is additional data you can send to the web server, although not required it is difficult to view a website properly without them.
 
@@ -242,11 +240,11 @@ Headers that are returned to the client from the server after a request
 - **Content-Encoding:** What method has been used to compress the data for transmission.
     
 
-### Cookies
+## Cookies
 
 Cookies are small pieces of data which are stored on your computer to remind a server who you are, personal settings and other things. Servers need cookies for those things because HTTP is stateless, meaning it does not keep track of your previous requests. They are saved when the browser receives a “Set-Cookie” header from the web server and are then send back with every request you make. Cookies are most often used for website authentication, but the value of it is usually not a plain text but a token which is not easily humanly guessable.
 
-## How Websites Work
+# How Websites Work
 
 When visiting a website, your browser makes a request to a web server, a computer dedicated to handle the request, asking for data a bout the page you are visiting, the server responds with that data and the browser uses it to show you the page.
 
@@ -266,7 +264,7 @@ Websites are primarily created using:
 - **JavaScript,** implementing complex features on pages using interactivity
     
 
-### HTML
+## HTML
 
 HyperText Markup Language (HTML) is the language websites are written in. Tags are the building blocks of HTML pages, telling the browser how to display them.
 
@@ -306,7 +304,7 @@ Elements can also have an id attribute (<p id “example”>) which is unique to
 
 To view the source code of a page right-click and select “View / Show Page Source Code”.
 
-### JavaScript
+## JavaScript
 
 JavaScript allows web pages to be interactive and control the functionality of it. Without JavaScript a website would be static and without interactive elements, such as a button that changes its style when pressed or animation.
 
@@ -326,7 +324,7 @@ The next code changes the text of a button when the button is pressed. Another e
 <button
 onclick='document.getElementById("demo").innerHTML = "Button Clicked";'>Click Me!</button>
 ``` 
-### Sensitive Data Exposure
+## Sensitive Data Exposure
 
 Sensitive Data Exposure occurs when a website does not properly protect (or remove) sensitive clear-text information to the end-user; usually in the site’s source code. A developer may forgot to remove login credentials or links to private parts of the website. Whenever assessing a website for security issues review the page source code.
 ```html
@@ -346,15 +344,15 @@ Sensitive Data Exposure occurs when a website does not properly protect (or remo
 </html>
 ```  
   
-### HTML Injection
+## HTML Injection
 
 HTML injection is a vulnerability that occurs when unfiltered user input, HTML or JavaScript code, is displayed on the page. The general rule is to never trust user input and sanatise everything the user enters before using it in the JavaScript function.
 
-## Putting It All Together
+# Putting It All Together
 
 To summarize what you have learned. When requesting a website, the browser first uses DNS to find the IP of the server it needs to communicate with. Using HTTP the computer communicates with the server, which returns HTML, JavaScript, CSS, Images, etc. and is then formatted by the browser to display the website.
 
-### Other Components
+## Other Components
 
 **Load Balancer**
 
@@ -374,7 +372,7 @@ Databases are used to store and recall data belonging to a website. They can ran
 
 A WAF analyses web requests for common attack techniques, hacking or DoS, and if the request comes from a real browser or a bot, before sending it to the server. It also checks if there is an excessive amount of traffic from a IP address, and if so the requests will be blocked and not sent to the webserver.
 
-### How Web Servers work
+## How Web Servers work
 #Web-Server
 
 What is a Web Server?
