@@ -135,7 +135,23 @@ The `sessions` command lists all active sessions and supports a number of option
 	- 445: microsoft-ds
 	- 3389: ms-wbt-server
 2. We use the `auxiliary/scanner/smb/smb_ms17_010` to check if the SMB service on port 445 is vulnerable to the `ms17_010` exploit, which gives us a reverse shell
-3. The target is vulnerable so we use the `windows/smb/ms17_010_eternalblue` module, set the payload to `generic/shell_reverse_tcp`, run the exploit and get a reverse shell.
+3. The target is vulnerable so we use the `windows/smb/ms17_010_eternalblue` module, use `show payloads` and set the payload to `generic/shell_reverse_tcp`, run the exploit and get a reverse shell.
+4. We use the following commands to find the flag:
+```
+dir
+cd C:/
+dir
+cd Users
+dir
+cd Jon
+dir 
+cd Documents
+dir
+type flag.txt
+```
+(dir displays the content of the current directory)
+5. We background the session with `STRG + Z`
+6. 
 ## Msfvenom
 Msfvenom allows you to create payloads in different formats (PHP, exe, dll, elf, ...) and for many systems (Apple, Windows, Android, Linux, ...) by giving access to all payloads available in the Metasploit framework.
 
@@ -174,3 +190,128 @@ All of these payloads are reverse payloads, so you need  the exploit/mult/handle
 **Exercise**
 
 # Meterpreter
+*Meterpreter* is a payload that runs on the target system and acts as an agent within a command and control architecture, meaning you will interact with the target OS and files through *Meterpreters* commands. 
+
+**How does Meterpreter work?**
+*Meterpreter* runs on the target in RAM and does not write itself on the target in a file. This is to avoid detection during an antivirus scan.
+It also tries to avoid detection by network-based *Intrusion Prevention System (IPS)* and *Intrusion Detection System (IDS)* by using encrypted communication with the server (usually your computer). If the target organization does not decrypt and inspect encrypted traffig (f.e. HTTPS) in the local network, *IPS* and *IDS* will not be able to detect its activities. *Meterpreter* is still detected by major antivirus software.
+## Commands
+**Core Commands**
+
+| Command      | Description                                               |
+| ------------ | --------------------------------------------------------- |
+| `background` | Backgrounds the current session                           |
+| `exit`       | Terminate the *Meterpreter* session                       |
+| `guid`       | Get the session Globally Unique Identifier (GUID)         |
+| `help`       | Display the help menu                                     |
+| `info`       | Display information about a Post module                   |
+| `ird`        | Open an interactive Ruby shell on the current session     |
+| `load`       | Loads one or more *Meterpreter* extensions (Kiwi, Python) |
+| `migrate`    | Migrate *Meterpreter* to another process                  |
+| `run`        | Execute a *Meterpreter* script or Post module             |
+| `sessions`   | Quikly switch to another session                          |
+**File system commands**
+
+| Command    | Description                         |
+| ---------- | ----------------------------------- |
+| `cat`      | Show the content of a file          |
+| `cd`       | Change directory                    |
+| `download` | Download a file or directory        |
+| `edit`     | Allows you to edit a file           |
+| `rm`       | Delete the specified file           |
+| `pwd`      | Print the current working directory |
+| `search`   | Search for files                    |
+| `upload`   | Upload a file or directory          |
+| `pwd`      | Print the current working directory |
+**Networking commands**
+
+| Command    | Description                                                |
+| ---------- | ---------------------------------------------------------- |
+| `arp`      | Displays the host *ARP* cache                              |
+| `ifconfig` | Displays network interfaces available on the target system |
+| `netstat`  | Display the network connections                            |
+| `portfwd`  | Forwards a local port to a remote service                  |
+| `route`    | View and modify the routing table                          |
+**System commands**
+
+| Command    | Description                                     |
+| ---------- | ----------------------------------------------- |
+| `clearev`  | Clear the event logs                            |
+| `execute`  | Executes a command                              |
+| `getpid`   | Show the current process identifier             |
+| `getuid`   | Shows the user that *Meterpreter* is running as |
+| `kill`     | Terminates a process                            |
+| `pkill`    | Terminate a process by name                     |
+| `ps`       | List running processes                          |
+| `reboot`   | Reboots the remote computer                     |
+| `shell`    | Drops into a system command shell               |
+| `shutdown` | Shut down the remote computer                   |
+| `sysinfo`  | Get information about the remote system         |
+**Other Commands**
+
+| Command         | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| `getsystem`     | Attempt to elevate your privileges of the local system     |
+| `hashdump`      | Dump the content of the SAM database                       |
+| `idletime`      | Return the number of seconds the remote user has been idle |
+| `keyscan_dump`  | Dumps the keystroke buffer                                 |
+| `keyscan_start` | Start capturing keystrokes                                 |
+| `keyscan_stop`  | Stop capturing keystrokes                                  |
+| `screenshare`   | Watch the remote user's desktop in real time               |
+| `screenshot`    | Take a screenshot of the interactive desktop               |
+| `record_mic`    | Records  audio from the default microphone for x seconds   |
+| `webcam_chat`   | Start a video chat                                         |
+| `webcam_list`   | List webcams                                               |
+| `webcam_snap`   | Take a snapshot from the specified webcam                  |
+| `webcam_stream` | Play a video stream from the specified webcam              |
+## Payloads 
+*Meterpreter* has a wide range of payloads, inckuding inline and staged, which you can list using 
+```
+msfvenom --list payloads | grep meterpreter
+```
+The list will show different versions available for the platforms:
+- Android
+- Apple iOS
+- Java
+- Linux
+- OSX
+- PHP
+- Python
+- Windows
+
+Deciding on what version to use you should consider:
+- The target's OS
+- Components on the target (is it a *PHP* website, is *Python* installed, etc.)
+- Network connection types that can be established (raw *TCP* ?, *HTTPS* reverse connection?, IPv6 addresses as closely monitored as IPv4?, etc.)
+## Post-Exploitation 
+In this phase of an attack you can concentrate on the following goals:
+- Gathering further information
+- Looking for interesting files, user credentials, additional network interfaces, ...
+- Privilege escalation
+- Lateral movement
+
+**Migrate**
+Migrating to another process help *Meterpreter* interact with it, f.e. a process like word.exe or notepad.exe is running so you migrate to it and start a keylogger.
+To migrate to a process you need to know the process id which you can find out using `ps` and then `migrate pid`.
+Be aware that you could lose your privileges when migrating form a higher privileged process to a less privileged one.
+
+**Hashdump**
+This command will list the content of the *Security Account Manager (SAM)* database, which stores the passwords of the users in the *New Technology LAN Manager (NTLM)* format.
+
+**Search**
+The search command is useful to locate files
+```
+search -f flag.txt
+```
+
+**Shell**
+This command will launch a regular command-line shell. `CTRL+Z` gets you back to the *Meterpreter* shell.
+# Post-Exploitation Challenge
+We already have a username and password; ballen and Password1
+1. We use the `exploit/windows/smb/psexec` module with the default *Meterpreter* payload to get access to the system
+2. We use `sysinfo` to get more information about the computer, (Name, OS, Domain, Logged in users)
+3. We navigate to `C:/shares` or background the current session, use the `windows/gather/enum_shares` to discover shares 
+4. We migrate to the process `lsass.exe`, by first using `ps` and then `migrate 768`. After that we use `hashdump` to get a list of the passwords stored there.
+5. We use https://hashes.com/en/decrypt/hash to crack the password hash of the user "jchambers" and get "trustno1"
+6. We use `search -f secrets.txt` to find the file at `c:\Program Files (x86)\Windows Multimedia Platform\secrets.txt` and use `cat 'c:\Program Files (x86)\Windows Multimedia Platform\secrets.txt'` to display the content "My Twitter password is KDSvbsw3849!"
+7. We use `search -f realsecret.txt` to find the file and use `c:\inetpub\wwwroot\realsecret.txt` to display the content "The Flash is the fastest man alive"
