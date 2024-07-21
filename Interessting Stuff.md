@@ -1,2 +1,3 @@
 - https://owasp.org/www-project-web-security-testing-guide/latest/
 - https://www.offsec.com/
+- https://book.hacktricks.xyz/

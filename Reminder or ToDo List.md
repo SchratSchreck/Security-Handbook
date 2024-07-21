@@ -1,0 +1,2 @@
+- Finish [[Cryptography 101]] summary
+- Finish [[John the Ripper]] exercises

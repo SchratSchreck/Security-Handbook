@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "d5d63a9822617e9a",
+            "id": "0ba4f8b606b4cb64",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Metasploid.md",
+                "file": "Reminder or ToDo List.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "SMB",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "5cce96382598ef50",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Metasploid.md",
+                "file": "Reminder or ToDo List.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Metasploid.md",
+                "file": "Reminder or ToDo List.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Metasploid.md"
+                "file": "Reminder or ToDo List.md"
               }
             }
           }
@@ -148,18 +147,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d5d63a9822617e9a",
+  "active": "0ba4f8b606b4cb64",
   "lastOpenFiles": [
-    "Windows Fundamentals.md",
+    "Capture the Flag (CTF) Write-Ups.md",
     "Metasploid.md",
     "Network Exploitation Basics.md",
     "Interessting Stuff.md",
+    "OWASP Top 10-2021.md",
+    "Cryptography 101.md",
+    "Reminder or ToDo List.md",
+    "Windows Fundamentals.md",
     "Network Fundamentals.md",
     "Linux Fundamentals.md",
     "How the Web works.md",
     "Introduction to (Re)searching.md",
-    "Cryptography 101.md",
-    "Capture the Flag (CTF) Write-Ups.md",
     "Burp Suite.md",
     "Upload Vulnerabilities.md",
     "Windows Active Directory.md",
@@ -167,7 +168,6 @@
     "Untitled",
     "Introduction to Defensive Security.md",
     "OWASP Juice Shop.md",
-    "OWASP Top 10-2021.md",
     "2024-04-01.md",
     "Introductory Networking.md",
     "images/WebApplicationComponents.svg.md",
@@ -180,7 +180,6 @@
     "Pasted image 20240220072525.png",
     "Welcome.md",
     "Untitled 1.canvas",
-    "Untitled.canvas",
-    "Introduction.md"
+    "Untitled.canvas"
   ]
 }
